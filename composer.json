@@ -1,0 +1,20 @@
+{
+  "name": "develalfy/blog",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "develalfy",
+      "email": "iam@develalfy.me"
+    }
+  ],
+  "require": {
+    "klein/klein": "^2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Blog\\": "src"
+    }
+  }
+}
