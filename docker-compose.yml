@@ -11,7 +11,7 @@ services:
     ports:
       - "9906:3306"
   web:
-    image: php:7.3-apache
+    build: .
     container_name: web
     depends_on:
       - db

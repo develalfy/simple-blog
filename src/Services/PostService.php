@@ -18,7 +18,7 @@ class PostService
     /**
      * @return array
      */
-    public function paginatedPosts(): array
+    public function getAllPosts(): array
     {
         return $this->postRepository->getAllPosts();
     }

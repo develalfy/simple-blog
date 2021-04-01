@@ -25,6 +25,11 @@ class PostController extends BaseController
      */
     public function index(): array
     {
-        return $this->postService->paginatedPosts();
+        return $this->postService->getAllPosts();
+    }
+
+    public function show($id)
+    {
+        var_dump($id);die();
     }
 }
