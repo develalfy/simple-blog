@@ -4,6 +4,7 @@
 namespace Blog\Services;
 
 
+use Blog\Models\Post;
 use Blog\Repositories\PostRepositoryInterface;
 
 class PostService
@@ -25,9 +26,9 @@ class PostService
 
     /**
      * @param int $id
-     * @return array
+     * @return Post
      */
-    public function getPost(int $id): array
+    public function getPost(int $id): Post
     {
         return $this->postRepository->getPost($id);
     }

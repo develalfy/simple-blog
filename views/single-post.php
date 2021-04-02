@@ -4,8 +4,8 @@
     <div class="container text-center">
 
         <div class="starter-template">
-            <h1><?= $post['title'] ?></h1>
-            <p class="lead"><?= $post['desc'] ?></p>
+            <h1><?= $post->getTitle() ?></h1>
+            <p class="lead"><?= $post->getDesc() ?></p>
         </div>
         <a href="/" class="btn btn-primary">Home</a>
     </div>

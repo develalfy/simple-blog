@@ -15,11 +15,14 @@
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
                                 <div class="card-body">
-                                    <p class="card-text"><?= ucfirst($this->e($post['title'])) ?>.</p>
+                                    <p class="card-text"><?= ucfirst($this->e($post->getTitle())) ?>.</p>
                                     <div class="d-flex justify-content-between">
                                         <div class="btn-group">
-                                            <a href="/posts/<?= $this->e($post['id']) ?>"
+                                            <a href="/posts/<?= $this->e($post->getId()) ?>"
                                                class="btn btn-block btn-outline-secondary">View</a>
+                                        </div>
+                                        <div>
+                                            <?= $this->e($post->getDateTime()) ?>
                                         </div>
                                     </div>
                                 </div>

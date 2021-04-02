@@ -2,6 +2,7 @@
 
 namespace Blog\Controllers;
 
+use Blog\Models\Post;
 use Blog\Services\PostService;
 
 class PostController extends BaseController
@@ -30,9 +31,9 @@ class PostController extends BaseController
 
     /**
      * @param $id
-     * @return array
+     * @return Post
      */
-    public function show($id): array
+    public function show($id): Post
     {
         return $this->postService->getPost($id);
     }
