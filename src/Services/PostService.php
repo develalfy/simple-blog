@@ -22,4 +22,13 @@ class PostService
     {
         return $this->postRepository->getAllPosts();
     }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getPost(int $id): array
+    {
+        return $this->postRepository->getPost($id);
+    }
 }

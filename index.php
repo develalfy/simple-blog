@@ -18,9 +18,9 @@ $klein->respond('GET', '/', function () use ($templates) {
 });
 
 $klein->respond('GET', '/posts/[i:id]', function ($request) use ($templates) {
-    $posts = (new PostController(new PostService(new PostRepository())))->show($request->id);
+    $post = (new PostController(new PostService(new PostRepository())))->show($request->id);
 
-    echo $templates->render('posts', ['posts' => $posts]);
+    echo $templates->render('single-post', ['post' => $post]);
 });
 
 $klein->dispatch();

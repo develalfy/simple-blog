@@ -28,8 +28,12 @@ class PostController extends BaseController
         return $this->postService->getAllPosts();
     }
 
-    public function show($id)
+    /**
+     * @param $id
+     * @return array
+     */
+    public function show($id): array
     {
-        var_dump($id);die();
+        return $this->postService->getPost($id);
     }
 }

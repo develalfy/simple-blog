@@ -10,13 +10,26 @@ class PostRepository implements PostRepositoryInterface
             [
                 'id' => 1,
                 'title' => 'new post',
-                'desc' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+                'desc' => 'lorem 1 ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
             ],
             [
                 'id' => 2,
                 'title' => 'new post 2',
-                'desc' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+                'desc' => 'lorem 2 ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
             ]
+        ];
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getPost(int $id): array
+    {
+        return [
+            'id' => 1,
+            'title' => 'new post',
+            'desc' => 'lorem 1 ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
         ];
     }
 }
