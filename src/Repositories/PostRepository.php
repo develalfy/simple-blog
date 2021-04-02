@@ -26,7 +26,7 @@ class PostRepository implements PostRepositoryInterface
                 'id' => 2,
                 'title' => 'new post 2',
                 'desc' => 'lorem 2 ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-                'datetime' => '2012-03-25 17:45:12'
+                'datetime' => '2012-03-25 12:45:12'
             ]
         ];
 
