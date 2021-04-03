@@ -19,4 +19,6 @@ You can start this application easily using **_docker-compose_**, so you've to p
 
 - Database can be found in the _database_ directory it's name is *backup_blog.sql* 
 
+- I'm using SonarLint and it did not produce any problem for my code except to finish the TODOs.
+  
 - I've put some TODOs just because the lake of time to describe fast how can I finish the task.
