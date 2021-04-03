@@ -1,4 +1,4 @@
-<?php use Blog\Models\Post;
+<?php use Blog\Models\Article;
 
 require 'header.php'; ?>
 
@@ -6,7 +6,7 @@ require 'header.php'; ?>
         <div class="album py-5">
             <div class="container text-center">
                 <div class="row">
-                    <?php /** @var Post $posts */
+                    <?php /** @var Article $posts */
                     foreach ($posts as $post): ?>
                         <div class="col-md-12">
                             <div class="card flex-md-row mb-4 box-shadow h-md-250">
@@ -17,7 +17,7 @@ require 'header.php'; ?>
                                     </h3>
                                     <div class="mb-1 text-muted"><?= $this->e($post->getCreatedAt()) ?></div>
                                     <p class="card-text mb-auto"><?= (strlen($this->e($post->getDesc())) > 1000) ? substr($this->e($post->getDesc()), 0, 1000) . '...' : $this->e($post->getDesc()); ?></p>
-                                    <a href="#">Author</a>
+                                    <a href="/users/<?= $this->e($post->getAuthor()->getId()) ?>"><?= $this->e($post->getAuthor()->getUsername()) ?></a>
                                 </div>
                                 <img src="<?= $post->getImage() ?>" alt="<?= $this->e($post->getImage()) ?>">
                             </div>

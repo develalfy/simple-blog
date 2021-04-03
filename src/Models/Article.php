@@ -2,13 +2,14 @@
 
 namespace Blog\Models;
 
-class Post
+class Article
 {
     const LIMIT_PER_PAGE = 3;
     private $id;
     private $title;
     private $desc;
     private $image;
+    private $author;
     private $createdAt;
 
     /**
@@ -78,6 +79,22 @@ class Post
     /**
      * @return mixed
      */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author): void
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -97,21 +114,35 @@ class Post
      */
     public function toObject($array): self
     {
-        $post = new Post();
+        $article = new Article();
 
-        $post->setId($array['id']);
-        $post->setTitle($array['title']);
-        $post->setDesc($array['desc']);
-        $post->setImage($array['image']);
-        $post->setCreatedAt($array['created_at']);
+        $article->setId($array['id']);
+        $article->setTitle($array['title']);
+        $article->setDesc($array['desc']);
+        $article->setImage($array['image']);
+        $article->setAuthor($this->toUser([
+            'id' => $array['users_id'],
+            'username' => $array['author_username'],
+            'email' => $array['author_email'],
+        ]));
+        $article->setCreatedAt($array['created_at']);
 
-        return $post;
+        return $article;
+    }
+
+    /**
+     * @param array $array
+     * @return User
+     */
+    public function toUser(array $array): User
+    {
+        return (new User())->toObject($array);
     }
 
     /**
      * @return int
      */
-    public function getPostsPerPageLimit(): int
+    public function getArticlesPerPageLimit(): int
     {
         return self::LIMIT_PER_PAGE;
     }

@@ -4,13 +4,13 @@
 namespace Blog\Repositories;
 
 
-use Blog\Models\Post;
+use Blog\Models\Article;
 
 interface PostRepositoryInterface
 {
-    public function __construct(Post $post);
+    public function __construct(Article $post);
 
     public function getAllPosts(): array;
 
-    public function getPost(int $id): Post;
+    public function getArticle(int $id): Article;
 }

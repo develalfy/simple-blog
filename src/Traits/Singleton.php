@@ -2,6 +2,8 @@
 
 namespace Blog\Traits;
 
+//https://coderwall.com/p/lk4ehw/singleton-classes-in-php-using-traits
+
 trait Singleton
 {
     private static $singleton = false;

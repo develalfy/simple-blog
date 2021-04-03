@@ -2,18 +2,18 @@
 
 namespace Blog\Repositories;
 
-use Blog\Models\Post;
+use Blog\Models\Article;
 use Blog\Classes\Database;
 use UnexpectedValueException;
 
 class PostRepository implements PostRepositoryInterface
 {
-    private $post;
+    private $article;
     private $db;
 
-    public function __construct(Post $post)
+    public function __construct(Article $post)
     {
-        $this->post = $post;
+        $this->article = $post;
         $this->db = Database::getInstance();
     }
 
@@ -23,14 +23,18 @@ class PostRepository implements PostRepositoryInterface
     public function getAllPosts(): array
     {
         $posts = $this->db->getConn()
-            ->query(
-                "SELECT * FROM posts ORDER BY created_at DESC LIMIT {$this->post->getPostsPerPageLimit()}"
-            )
+            ->query("
+                SELECT p.*, u.username as author_username, u.email as author_email 
+                FROM articles p
+                LEFT JOIN users u ON u.id = p.users_id
+                ORDER BY created_at DESC 
+                LIMIT {$this->article->getArticlesPerPageLimit()}
+            ")
             ->fetchAll();
 
         $postsArray = [];
         foreach ($posts as $key => $post) {
-            $postsArray[$key] = $this->post->toObject($post);
+            $postsArray[$key] = $this->article->toObject($post);
         }
 
         return $postsArray;
@@ -38,10 +42,10 @@ class PostRepository implements PostRepositoryInterface
 
     /**
      * @param int $id
-     * @return Post
+     * @return Article
      * @throws UnexpectedValueException
      */
-    public function getPost(int $id): Post
+    public function getArticle(int $id): Article
     {
         $singlePost = $this->db->getConn()
             ->query(
@@ -49,10 +53,10 @@ class PostRepository implements PostRepositoryInterface
             )
             ->fetchAll();
 
-        if (empty($singlePost)){
+        if (empty($singlePost)) {
             throw new UnexpectedValueException();
         }
 
-        return $this->post->toObject($singlePost[0]);
+        return $this->article->toObject($singlePost[0]);
     }
 }
