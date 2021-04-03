@@ -10,7 +10,7 @@ class Database
     use Singleton;
 
     private $conn;
-    private $host = '172.27.0.1';
+    private $host = 'mysql';
     private $name = 'blog';
     private $port = '9906';
     private $user = 'user';
