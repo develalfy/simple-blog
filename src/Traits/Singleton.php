@@ -2,36 +2,19 @@
 
 namespace Blog\Traits;
 
-use PDO;
-
 trait Singleton
 {
-    protected static $instance = null;
-    private $conn;
-    private $host = 'localhost';
-    private $user = 'user';
-    private $pass = 'password';
-    private $name = 'blog';
+    private static $singleton = false;
 
-    private function __construct()
-    {
-        $this->conn = new PDO(
-            "mysql:host={$this->host};dbname={$this->name}",
-            $this->user,
-            $this->pass,
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")
-        );
+    private function __construct() {
+        $this->instance();
     }
 
-    /**
-     * call this method to get instance
-     **/
-    public static function getInstance()
-    {
-        if (static::$instance === null) {
-            static::$instance = new static();
+    public static function getInstance() {
+        if (self::$singleton === false) {
+            self::$singleton = new self();
         }
 
-        return static::$instance;
+        return self::$singleton;
     }
 }

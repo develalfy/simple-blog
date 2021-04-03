@@ -3,40 +3,28 @@
 namespace Blog\Repositories;
 
 use Blog\Models\Post;
+use Blog\Classes\Database;
 
 class PostRepository implements PostRepositoryInterface
 {
     private $post;
+    private $db;
 
     public function __construct(Post $post)
     {
         $this->post = $post;
+        $this->db = Database::getInstance();
     }
 
     public function getAllPosts(): array
     {
-        $postsArr = [
-            [
-                'id' => 1,
-                'title' => 'new post 1',
-                'desc' => 'lorem 1 ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-                'datetime' => '2012-03-24 17:45:12'
-            ],
-            [
-                'id' => 2,
-                'title' => 'new post 2',
-                'desc' => 'lorem 2 ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-                'datetime' => '2012-03-25 12:45:12'
-            ]
-        ];
+        $posts = $this->db->getConn()->query("SELECT * FROM posts")->fetchAll();
 
-        $posts = [];
-
-        foreach ($postsArr as $key => $post) {
-            $posts[$key] = $this->post->toObject($post);
+        foreach ($posts as $key => $post) {
+            $postsArray[$key] = $this->post->toObject($post);
         }
 
-        return $posts;
+        return $postsArray;
     }
 
     /**
