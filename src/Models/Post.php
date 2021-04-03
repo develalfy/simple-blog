@@ -8,6 +8,7 @@ class Post
     private $id;
     private $title;
     private $desc;
+    private $image;
     private $createdAt;
 
     /**
@@ -61,6 +62,22 @@ class Post
     /**
      * @return mixed
      */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -85,6 +102,7 @@ class Post
         $post->setId($array['id']);
         $post->setTitle($array['title']);
         $post->setDesc($array['desc']);
+        $post->setImage($array['image']);
         $post->setCreatedAt($array['created_at']);
 
         return $post;

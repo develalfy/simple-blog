@@ -1,32 +1,25 @@
-<?php require 'header.php'; ?>
-    <main role="main">
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">Blog</h1>
-                <p class="lead text-muted">Here we list just titles then you can view each post by clicking view button.</p>
-            </div>
-        </section>
+<?php use Blog\Models\Post;
 
+require 'header.php'; ?>
+
+    <main role="main">
         <div class="album py-5">
             <div class="container text-center">
-
                 <div class="row">
-                    <?php /** @var \Blog\Models\Post $posts */
+                    <?php /** @var Post $posts */
                     foreach ($posts as $post): ?>
-                        <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                                <div class="card-body">
-                                    <p class="card-text"><?= ucfirst($this->e($post->getTitle())) ?>.</p>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="btn-group">
-                                            <a href="/posts/<?= $this->e($post->getId()) ?>"
-                                               class="btn btn-block btn-outline-secondary">View</a>
-                                        </div>
-                                        <div>
-                                            <?= $this->e($post->getCreatedAt()) ?>
-                                        </div>
-                                    </div>
+                        <div class="col-md-12">
+                            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <h3 class="mb-0">
+                                        <a class="text-dark"
+                                           href="/posts/<?= $this->e($post->getId()) ?>"><?= ucfirst($this->e($post->getTitle())) ?></a>
+                                    </h3>
+                                    <div class="mb-1 text-muted"><?= $this->e($post->getCreatedAt()) ?></div>
+                                    <p class="card-text mb-auto"><?= (strlen($this->e($post->getDesc())) > 1000) ? substr($this->e($post->getDesc()), 0, 1000) . '...' : $this->e($post->getDesc()); ?></p>
+                                    <a href="#">Author</a>
                                 </div>
+                                <img src="<?= $post->getImage() ?>" alt="<?= $this->e($post->getImage()) ?>">
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -34,4 +27,5 @@
             </div>
         </div>
     </main>
-<?php require 'footer.php'?>
+
+<?php require 'footer.php' ?>
