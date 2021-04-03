@@ -26,4 +26,9 @@ $klein->respond('GET', '/articles/[i:id]', function ($request) use ($templates, 
     echo $templates->render('single-article', ['article' => $article]);
 });
 
+//todo: userService, userRepository to be implemented to get author data
+$klein->respond('GET', '/authors/[i:id]', function ($request) use ($templates) {
+    echo $templates->render('single-author');
+});
+
 $klein->dispatch();

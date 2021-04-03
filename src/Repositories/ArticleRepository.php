@@ -26,9 +26,9 @@ class ArticleRepository implements ArticleRepositoryInterface
         // and when user clicks second page will get second 3 elements ... etc
         $articles = $this->db->getConn()
             ->query("
-                SELECT p.*, u.username as author_username, u.email as author_email 
-                FROM articles p
-                LEFT JOIN users u ON u.id = p.users_id
+                SELECT a.*, u.username as author_username, u.email as author_email 
+                FROM articles a
+                LEFT JOIN users u ON u.id = a.users_id
                 ORDER BY created_at DESC 
                 LIMIT {$this->article->getArticlesPerPageLimit()}
             ")
@@ -50,9 +50,12 @@ class ArticleRepository implements ArticleRepositoryInterface
     public function getArticle(int $id): Article
     {
         $singleArticle = $this->db->getConn()
-            ->query(
-                "SELECT * FROM articles WHERE ID = {$id}"
-            )
+            ->query("
+                SELECT a.*, u.username as author_username, u.email as author_email 
+                FROM articles a
+                LEFT JOIN users u ON u.id = a.users_id
+                AND a.id = {$id}
+            ")
             ->fetchAll();
 
         if (empty($singleArticle)) {

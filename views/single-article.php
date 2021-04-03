@@ -9,6 +9,7 @@
                 <h1><?= $this->e($article->getTitle()) ?></h1>
                 <img src="<?= $this->e($article->getImage()) ?>" alt="">
                 <p class="lead"><?= $this->e($article->getDesc()) ?></p>
+                <p class="lead">Author: <?= $this->e($article->getAuthor()->getUsername()) ?></p>
             </div>
         </div>
     </div>

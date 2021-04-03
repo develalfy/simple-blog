@@ -17,7 +17,7 @@ require 'header.php'; ?>
                                     </h3>
                                     <div class="mb-1 text-muted"><?= $this->e($article->getCreatedAt()) ?></div>
                                     <p class="card-text mb-auto"><?= (strlen($this->e($article->getDesc())) > 1000) ? substr($this->e($article->getDesc()), 0, 1000) . '...' : $this->e($article->getDesc()); ?></p>
-                                    <a href="/users/<?= $this->e($article->getAuthor()->getId()) ?>">Author: <?= $this->e($article->getAuthor()->getUsername()) ?></a>
+                                    <a href="/authors/<?= $this->e($article->getAuthor()->getId()) ?>">Author: <?= $this->e($article->getAuthor()->getUsername()) ?></a>
                                 </div>
                                 <img src="<?= $article->getImage() ?>" alt="<?= $this->e($article->getImage()) ?>">
                             </div>
