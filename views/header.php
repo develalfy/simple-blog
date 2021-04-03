@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div class="col-4 text-center">
-                <b class="blog-header-logo text-dark" href="#">Blog</b>
+                <strong class="blog-header-logo text-dark">Blog</strong>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
