@@ -4,6 +4,7 @@ namespace Blog\Repositories;
 
 use Blog\Models\Post;
 use Blog\Classes\Database;
+use UnexpectedValueException;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -16,10 +17,18 @@ class PostRepository implements PostRepositoryInterface
         $this->db = Database::getInstance();
     }
 
+    /**
+     * @return array
+     */
     public function getAllPosts(): array
     {
-        $posts = $this->db->getConn()->query("SELECT * FROM posts")->fetchAll();
+        $posts = $this->db->getConn()
+            ->query(
+                "SELECT * FROM posts ORDER BY created_at DESC LIMIT {$this->post->getPostsPerPageLimit()}"
+            )
+            ->fetchAll();
 
+        $postsArray = [];
         foreach ($posts as $key => $post) {
             $postsArray[$key] = $this->post->toObject($post);
         }
@@ -30,17 +39,20 @@ class PostRepository implements PostRepositoryInterface
     /**
      * @param int $id
      * @return Post
+     * @throws UnexpectedValueException
      */
     public function getPost(int $id): Post
     {
-        // query to get single post as array
-        $postArr = [
-            'id' => $id,
-            'title' => 'new post ' . $id,
-            'desc' => 'lorem ' . $id . ' ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-            'datetime' => '2012-03-24 17:45:12'
-        ];
+        $singlePost = $this->db->getConn()
+            ->query(
+                "SELECT * FROM posts WHERE ID = {$id}"
+            )
+            ->fetchAll();
 
-        return $this->post->toObject($postArr);
+        if (empty($singlePost)){
+            throw new UnexpectedValueException();
+        }
+
+        return $this->post->toObject($singlePost[0]);
     }
 }

@@ -35,6 +35,13 @@ class PostController extends BaseController
      */
     public function show($id): Post
     {
-        return $this->postService->getPost($id);
+        try {
+            $post = $this->postService->getPost($id);
+        } catch (\UnexpectedValueException $e) {
+            // to be redirected to another page to be displayed
+            var_dump("No posts found !");die();
+        }
+
+        return $post;
     }
 }

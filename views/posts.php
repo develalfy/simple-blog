@@ -11,7 +11,8 @@
             <div class="container text-center">
 
                 <div class="row">
-                    <?php foreach ($posts as $post): ?>
+                    <?php /** @var \Blog\Models\Post $posts */
+                    foreach ($posts as $post): ?>
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
                                 <div class="card-body">
@@ -22,7 +23,7 @@
                                                class="btn btn-block btn-outline-secondary">View</a>
                                         </div>
                                         <div>
-                                            <?= $this->e($post->getDateTime()) ?>
+                                            <?= $this->e($post->getCreatedAt()) ?>
                                         </div>
                                     </div>
                                 </div>

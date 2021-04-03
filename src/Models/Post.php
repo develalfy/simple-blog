@@ -2,14 +2,13 @@
 
 namespace Blog\Models;
 
-use DateTime;
-
 class Post
 {
+    const LIMIT_PER_PAGE = 3;
     private $id;
     private $title;
     private $desc;
-    private $dateTime;
+    private $createdAt;
 
     /**
      * @return int
@@ -60,19 +59,19 @@ class Post
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getDateTime(): string
+    public function getCreatedAt()
     {
-        return $this->dateTime;
+        return $this->createdAt;
     }
 
     /**
-     * @param string $dateTime
+     * @param mixed $createdAt
      */
-    public function setDateTime(string $dateTime): void
+    public function setCreatedAt($createdAt): void
     {
-        $this->dateTime = $dateTime;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -86,8 +85,16 @@ class Post
         $post->setId($array['id']);
         $post->setTitle($array['title']);
         $post->setDesc($array['desc']);
-        $post->setDateTime($array['datetime']);
+        $post->setCreatedAt($array['created_at']);
 
         return $post;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostsPerPageLimit(): int
+    {
+        return self::LIMIT_PER_PAGE;
     }
 }
