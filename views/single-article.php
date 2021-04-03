@@ -4,11 +4,12 @@
         <div class="container text-center">
 
             <div class="starter-template">
-                <h1><?= /** @var \Blog\Models\Article $article */
-                    $article->getTitle() ?></h1>
-                <p class="lead"><?= $article->getDesc() ?></p>
+                <h4><?= /** @var \Blog\Models\Article $article */
+                    $this->e($article->getCreatedAt()) ?></h4>
+                <h1><?= $this->e($article->getTitle()) ?></h1>
+                <img src="<?= $this->e($article->getImage()) ?>" alt="">
+                <p class="lead"><?= $this->e($article->getDesc()) ?></p>
             </div>
-            <a href="/" class="btn btn-primary">Home</a>
         </div>
     </div>
 </main>
