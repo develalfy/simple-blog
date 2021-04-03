@@ -1,29 +1,29 @@
 <?php
 require_once('./vendor/autoload.php');
 
-use Blog\Controllers\PostController;
+use Blog\Controllers\ArticleController;
 use Blog\Models\Article;
-use Blog\Repositories\PostRepository;
-use Blog\Services\PostService;
+use Blog\Repositories\ArticleRepository;
+use Blog\Services\ArticleService;
 use Klein\Klein;
 
 $templates = new League\Plates\Engine('views');
 
-$postService = new PostService(new PostRepository(new Article()));
+$articleService = new ArticleService(new ArticleRepository(new Article()));
 
 // routes
 $klein = new Klein();
 
-$klein->respond('GET', '/', function () use ($templates, $postService) {
-    $posts = (new PostController($postService))->index();
+$klein->respond('GET', '/', function () use ($templates, $articleService) {
+    $articles = (new ArticleController($articleService))->index();
 
-    echo $templates->render('articles', ['posts' => $posts]);
+    echo $templates->render('articles', ['articles' => $articles]);
 });
 
-$klein->respond('GET', '/posts/[i:id]', function ($request) use ($templates, $postService) {
-    $post = (new PostController($postService))->show($request->id);
+$klein->respond('GET', '/articles/[i:id]', function ($request) use ($templates, $articleService) {
+    $article = (new ArticleController($articleService))->show($request->id);
 
-    echo $templates->render('single-post', ['post' => $post]);
+    echo $templates->render('single-article', ['article' => $article]);
 });
 
 $klein->dispatch();

@@ -6,20 +6,20 @@ require 'header.php'; ?>
         <div class="album py-5">
             <div class="container text-center">
                 <div class="row">
-                    <?php /** @var Article $posts */
-                    foreach ($posts as $post): ?>
+                    <?php /** @var Article $articles */
+                    foreach ($articles as $article): ?>
                         <div class="col-md-12">
                             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                                 <div class="card-body d-flex flex-column align-items-start">
                                     <h3 class="mb-0">
                                         <a class="text-dark"
-                                           href="/posts/<?= $this->e($post->getId()) ?>"><?= ucfirst($this->e($post->getTitle())) ?></a>
+                                           href="/articles/<?= $this->e($article->getId()) ?>"><?= ucfirst($this->e($article->getTitle())) ?></a>
                                     </h3>
-                                    <div class="mb-1 text-muted"><?= $this->e($post->getCreatedAt()) ?></div>
-                                    <p class="card-text mb-auto"><?= (strlen($this->e($post->getDesc())) > 1000) ? substr($this->e($post->getDesc()), 0, 1000) . '...' : $this->e($post->getDesc()); ?></p>
-                                    <a href="/users/<?= $this->e($post->getAuthor()->getId()) ?>"><?= $this->e($post->getAuthor()->getUsername()) ?></a>
+                                    <div class="mb-1 text-muted"><?= $this->e($article->getCreatedAt()) ?></div>
+                                    <p class="card-text mb-auto"><?= (strlen($this->e($article->getDesc())) > 1000) ? substr($this->e($article->getDesc()), 0, 1000) . '...' : $this->e($article->getDesc()); ?></p>
+                                    <a href="/users/<?= $this->e($article->getAuthor()->getId()) ?>">Author: <?= $this->e($article->getAuthor()->getUsername()) ?></a>
                                 </div>
-                                <img src="<?= $post->getImage() ?>" alt="<?= $this->e($post->getImage()) ?>">
+                                <img src="<?= $article->getImage() ?>" alt="<?= $this->e($article->getImage()) ?>">
                             </div>
                         </div>
                     <?php endforeach; ?>

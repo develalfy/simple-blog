@@ -6,23 +6,25 @@ use Blog\Models\Article;
 use Blog\Classes\Database;
 use UnexpectedValueException;
 
-class PostRepository implements PostRepositoryInterface
+class ArticleRepository implements ArticleRepositoryInterface
 {
     private $article;
     private $db;
 
-    public function __construct(Article $post)
+    public function __construct(Article $article)
     {
-        $this->article = $post;
+        $this->article = $article;
         $this->db = Database::getInstance();
     }
 
     /**
-     * @return array
+     * @return Article[]
      */
-    public function getAllPosts(): array
+    public function getAllArticles(): array
     {
-        $posts = $this->db->getConn()
+        //todo: pagination here will be done by making offset in the query to get the first 3 items
+        // and when user clicks second page will get second 3 elements ... etc
+        $articles = $this->db->getConn()
             ->query("
                 SELECT p.*, u.username as author_username, u.email as author_email 
                 FROM articles p
@@ -32,12 +34,12 @@ class PostRepository implements PostRepositoryInterface
             ")
             ->fetchAll();
 
-        $postsArray = [];
-        foreach ($posts as $key => $post) {
-            $postsArray[$key] = $this->article->toObject($post);
+        $articlesArray = [];
+        foreach ($articles as $key => $article) {
+            $articlesArray[$key] = $this->article->toObject($article);
         }
 
-        return $postsArray;
+        return $articlesArray;
     }
 
     /**
@@ -47,16 +49,16 @@ class PostRepository implements PostRepositoryInterface
      */
     public function getArticle(int $id): Article
     {
-        $singlePost = $this->db->getConn()
+        $singleArticle = $this->db->getConn()
             ->query(
-                "SELECT * FROM posts WHERE ID = {$id}"
+                "SELECT * FROM articles WHERE ID = {$id}"
             )
             ->fetchAll();
 
-        if (empty($singlePost)) {
+        if (empty($singleArticle)) {
             throw new UnexpectedValueException();
         }
 
-        return $this->article->toObject($singlePost[0]);
+        return $this->article->toObject($singleArticle[0]);
     }
 }

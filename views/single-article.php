@@ -4,9 +4,9 @@
         <div class="container text-center">
 
             <div class="starter-template">
-                <h1><?= /** @var \Blog\Models\Article $post */
-                    $post->getTitle() ?></h1>
-                <p class="lead"><?= $post->getDesc() ?></p>
+                <h1><?= /** @var \Blog\Models\Article $article */
+                    $article->getTitle() ?></h1>
+                <p class="lead"><?= $article->getDesc() ?></p>
             </div>
             <a href="/" class="btn btn-primary">Home</a>
         </div>
