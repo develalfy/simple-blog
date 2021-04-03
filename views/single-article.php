@@ -9,7 +9,7 @@
                 <h1><?= $this->e($article->getTitle()) ?></h1>
                 <img src="<?= $this->e($article->getImage()) ?>" alt="">
                 <p class="lead"><?= $this->e($article->getDesc()) ?></p>
-                <p class="lead">Author: <?= $this->e($article->getAuthor()->getUsername()) ?></p>
+                <p class="lead">Author: <a href="/authors/<?= $this->e($article->getAuthor()->getId()) ?>"><?= $this->e($article->getAuthor()->getUsername()) ?></a></p>
             </div>
         </div>
     </div>
